@@ -12,7 +12,7 @@ namespace cs_crypto_bot_4._0.Indicators
         public double[] values;
 
         private int smoothing;
-        private int i = 0;
+        public int i = -1;
         public EMA(int length, int size = 200, int smoothing = 2)
         {
             this.length = length;
@@ -22,21 +22,24 @@ namespace cs_crypto_bot_4._0.Indicators
         
         public void update(double price)
         {
-            if (i > this.length)
+            ++i;
+
+            if (i > length)
             {
-                this.values[i] = (price * (this.smoothing / (1 + this.length))) + (this.values.Last() * (1 - (this.smoothing / (1 + this.length))));
+                double p1 = (price * ((double)smoothing / (1 + (double)length)));
+                double p2 = (values[i - 1] * (1 - ((double)smoothing / (1 + (double)length))));
+
+                values[i] = p1 + p2;
             }
             else
             {
-                this.values[i] = price;
+                values[i] = price;
             }
-
-            i++;
         }
 
         public double getLast()
         {
-            return this.values.Last();
+            return values[i];
         }
     }
 }
