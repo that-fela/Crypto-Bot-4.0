@@ -8,5 +8,10 @@ namespace cs_crypto_bot_4._0
         {
             
         }
+
+        static void Testema3ema6ema9()
+        {
+
+        }
     }
 }
