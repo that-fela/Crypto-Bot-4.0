@@ -13,8 +13,8 @@ namespace cs_crypto_bot_4._0
         public double open;
         public double close;
         public double volume;
-        public double open_time;
-        public double close_time;
+        public int open_time;
+        public int close_time;
 
         public double[] prices = new double[10];
 
@@ -25,12 +25,13 @@ namespace cs_crypto_bot_4._0
             this.timeFrame = timeFrame;
         }
 
-        public void SetValues(double high, double low, double close, double open)
+        public void SetValues(double high, double low, double close, double open, int time = 0)
         {
             this.high = high;
             this.low = low;
             this.close = close;
             this.open = open;
+            this.open_time = time;
         }
     }
 }

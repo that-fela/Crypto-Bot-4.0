@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cs_crypto_bot_4._0.Traders
+namespace cs_crypto_bot_4._0
 {
     internal class _BaseTrader
     {
+        public double takeprofitP;
+        public double stoplossP;
         public bool paperTrading;
         public double fee;
         public Candle[] candles = new Candle[_settings.getMaxSize()];
@@ -17,6 +19,8 @@ namespace cs_crypto_bot_4._0.Traders
         public double money;
         public double startMoney;
         public int startAfter = 50;
+        public int wins = 0;
+        public int losses = 0;
 
         public _BaseTrader(bool paperTrading = true, double startMoney = 1000, double fee = 0.0015)
         {

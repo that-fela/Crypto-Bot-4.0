@@ -8,9 +8,6 @@ namespace cs_crypto_bot_4._0.Traders
 {
     internal class EMA3EMA6EMA9 : _BaseTrader
     {
-        public double takeprofitP;
-        public double stoplossP;
-
         public Indicators.EMA EMA3 = new Indicators.EMA(3);
         public Indicators.EMA EMA6 = new Indicators.EMA(6);
         public Indicators.EMA EMA9 = new Indicators.EMA(9);
@@ -45,13 +42,13 @@ namespace cs_crypto_bot_4._0.Traders
                     {
                         if (cur_trade.type == true) // long
                         {
-                            if (cur_trade.hitStoploss(candles[ti].low)) { money = money * cur_trade.getLossP() - money * fee; }
-                            else if (cur_trade.hitTakeprofit(candles[ti].high)) { money = money * cur_trade.getProfitP() - money * fee; }
+                            if (cur_trade.hitStoploss(candles[ti].low)) { money = money * cur_trade.getLossP() - money * fee; losses++; }
+                            else if (cur_trade.hitTakeprofit(candles[ti].high)) { money = money * cur_trade.getProfitP() - money * fee; wins++; }
                         }
                         else if (cur_trade.type == false) // short
                         {
-                            if (cur_trade.hitStoploss(candles[ti].high)) { money = money * cur_trade.getLossP() - money * fee; }
-                            else if (cur_trade.hitTakeprofit(candles[ti].low)) { money = money * cur_trade.getProfitP() - money * fee; }
+                            if (cur_trade.hitStoploss(candles[ti].high)) { money = money * cur_trade.getLossP() - money * fee; losses++; }
+                            else if (cur_trade.hitTakeprofit(candles[ti].low)) { money = money * cur_trade.getProfitP() - money * fee; wins++; }
                         }
                     }
                 }
@@ -70,7 +67,8 @@ namespace cs_crypto_bot_4._0.Traders
                         true,
                         candles[i].close,
                         candles[i].close * (1 + takeprofitP),
-                        candles[i].close * (1 - stoplossP));
+                        candles[i].close * (1 - stoplossP),
+                        candles[i].open_time);
                 }
                 else if ((EMA3.getLast() < EMA6.getLast()) && (EMA6.getLast() < EMA9.getLast()))
                 {
@@ -80,7 +78,8 @@ namespace cs_crypto_bot_4._0.Traders
                         false,
                         candles[i].close,
                         candles[i].close * (1 - takeprofitP),
-                        candles[i].close * (1 + stoplossP));
+                        candles[i].close * (1 + stoplossP),
+                        candles[i].open_time);
 
                 }
             }

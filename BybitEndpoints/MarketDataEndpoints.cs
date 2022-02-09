@@ -41,7 +41,7 @@ namespace cs_crypto_bot_4._0
                 candles[i].open = Convert.ToDouble(point["open"].ToString());
                 candles[i].high = Convert.ToDouble(point["high"].ToString());
                 candles[i].low = Convert.ToDouble(point["low"].ToString());
-                candles[i].open_time = Convert.ToDouble(point["start_at"].ToString());
+                candles[i].open_time = Convert.ToInt32(point["start_at"].ToString());
 
                 i++;
             }
