@@ -11,9 +11,9 @@ namespace cs_crypto_bot_4._0.Indicators
         public int length;
         public double[] values;
 
-        private int smoothing;
+        private double smoothing;
         public int i = -1;
-        public EMA(int length, int size = 200, int smoothing = 2)
+        public EMA(int length, int size = 200, double smoothing=2.0)
         {
             this.length = length;
             this.values = new double[size];
@@ -26,8 +26,8 @@ namespace cs_crypto_bot_4._0.Indicators
 
             if (i > length)
             {
-                double p1 = (price * ((double)smoothing / (1 + (double)length)));
-                double p2 = (values[i - 1] * (1 - ((double)smoothing / (1 + (double)length))));
+                double p1 = (price * (smoothing / (1 + (double)length)));
+                double p2 = (values[i - 1] * (1 - (smoothing / (1 + (double)length))));
 
                 values[i] = p1 + p2;
             }

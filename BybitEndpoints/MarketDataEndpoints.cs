@@ -37,11 +37,13 @@ namespace cs_crypto_bot_4._0
             {
                 candles[i] = new Candle();
 
-                candles[i].close = Convert.ToDouble(point["close"].ToString());
-                candles[i].open = Convert.ToDouble(point["open"].ToString());
-                candles[i].high = Convert.ToDouble(point["high"].ToString());
-                candles[i].low = Convert.ToDouble(point["low"].ToString());
-                candles[i].open_time = Convert.ToInt32(point["start_at"].ToString());
+                candles[i].SetValues(
+                    Convert.ToDouble(point["high"].ToString()),
+                    Convert.ToDouble(point["low"].ToString()),
+                    Convert.ToDouble(point["close"].ToString()),
+                    Convert.ToDouble(point["open"].ToString()),
+                    Convert.ToInt32(point["start_at"].ToString())
+                    );
 
                 i++;
             }
