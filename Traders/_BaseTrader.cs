@@ -45,7 +45,7 @@ namespace cs_crypto_bot_4._0
 
         public virtual void Update()
         {
-            // money shit
+            // checks the current position
             checkPosition();
 
             // indicator updates here
